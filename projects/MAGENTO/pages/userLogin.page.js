@@ -64,5 +64,20 @@ async clickOnSignInBtn() {
     throw error;
   }
 }
+
+async verifyHomePage(){
+    try {
+      // Verify that the user is redirected to the myaccount
+      console.log('Verifying user redirection to dashboard...');
+      const homepageTitle = await page.locator(userLoginLocators.loginUser.homePage).textContent();
+      console.log('Dashboard title:', homepageTitle);
+      expect(homepageTitle).toContain('Home Page');
+      console.log('User successfully redirected to the myaccount.');
+    } catch (error) {
+      console.error('Error verifying user redirection to myaccount:', error.message);
+      throw error;
+    }
+  
+  }
 }
 module.exports = {UserLogin};

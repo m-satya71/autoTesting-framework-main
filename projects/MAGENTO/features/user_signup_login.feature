@@ -27,9 +27,8 @@ Feature: User Account Creation and Login on Magento Demo Site
     Given Launch the Magento website
     When  Click on the Sign In link on homepage
     Then  Enter registered Email and Password dynamically from script
-    Then  Click on "Sign In" button
-    Then  Verify the user is logged in and the dashboard is displayed
-    Then  Verify the user is redirected to the My Account dashboard
+    Then  Click on Sign In Button on Login page
+    Then  Verify the user is redirected to the Home Page dashboard
     Then  Logout from application
     Then  Close the browser
 

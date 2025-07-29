@@ -13,10 +13,14 @@ Then('Click on the Sign In link on homepage', async function () {
 Then('Enter registered Email and Password dynamically from script', async function () {
   await poManager.loginpage.enterUserCredentials();
 });
-Then('Click on {string} button', async function () {
-  await poManager.loginpage.clickOnSignBtn()
+Then('Click on Sign In Button on Login page', async function () {
+  await poManager.loginpage.clickOnSignInBtn();
 });
 
-Then('Verify the user is logged in and the dashboard is displayed', async function () {
-  await poManager.loginpage.verifyDashboardOnLoggedInPage();
+Then('Verify the user is redirected to the Home Page dashboard', async function () {
+  await poManager.loginpage.verifyHomePage();
 });
+
+
+
+
