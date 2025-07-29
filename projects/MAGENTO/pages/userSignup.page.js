@@ -15,31 +15,30 @@ setDefaultTimeout(60 * 1000);
 
 class UserSignUp {
 
-
-async goTo() {
-
-    try {
-    const url = process.env.TEST_DEMO_URL;
-    console.log(`Navigating to: ${url}`);
-    await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 60000 });
-    await page.waitForTimeout(2000); // Wait for 2 seconds to ensure the page is loaded
-    await page.waitForLoadState('networkidle');
-    // Wait for a specific element to ensure the page is fully loaded
-    console.log('Navigation successful.');
-  } catch (error) {
-    console.error('Error in goTo():', error);
-    throw error;
- 
-  }
-}
   
     /**
-     * @author: Mavuri
-     * @Function_Name: CreateNewUser on magento site
+     * @author: Mavuri Satya
+     * @Function_Name: goTo
+     * @Description: Navigate to the Magento site and try to access the homepage
      * @Description: This function creates a new user on the Magento site by filling in the
      * @param:  none
      * @returns: none
      */
+async goTo() {
+
+    try {
+   const url = process.env.TEST_DEMO_URL;
+    console.log(`Navigating to: ${url}`);
+    await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 60000 });
+    // Wait for a reliable element that indicates the page is ready
+    await page.waitForSelector('header', { timeout: 60000 }); // Replace 'header' with a selector unique to your homepage
+    console.log('Navigation successful.');
+  } catch (error) {
+    console.error('Error in goTo():', error);
+    throw error;
+  }
+}
+
 async clickOnCreateAnAccountHyperLink(linkName) {
   try {
   if (linkName === "Create an Account") {
@@ -51,11 +50,8 @@ async clickOnCreateAnAccountHyperLink(linkName) {
     //Dismiss any pop-up window if it appears
     const dismissButton = await page.locator(userSingupLocators.newUser.windowDismiss);
      if (await dismissButton.isVisible()) {
-    //   await dismissButton.click();
-    //   await page.waitForTimeout(2000); // Wait for the pop-up to be dismissed
-    //   console.log('Dismissed the pop-up window.');
-     
-    await dismissButton.click({ force: true });
+      console.log('Dismissed the pop-up window.');
+      await dismissButton.click({ force: true });
   }
   }
   } catch (error) {

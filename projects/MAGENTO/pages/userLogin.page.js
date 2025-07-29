@@ -11,7 +11,8 @@ const credPath = path.join(__dirname, '../../testData/latestSignup.json');
 class UserLogin {
   /**
    * @author: Satya
-   * @Function_Name: goTo
+   * @Function_Name: clickOnSignInLink
+   * @Description: Click on the "Sign In" link to navigate to the login page
    * @Description: Launch the site from different environments (PROD, TRAINING)
    * @Params: none
    * @returns: none
