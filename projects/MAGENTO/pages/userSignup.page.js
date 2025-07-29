@@ -21,7 +21,7 @@ async goTo() {
     try {
     const url = process.env.TEST_DEMO_URL;
     console.log(`Navigating to: ${url}`);
-    await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 50000 });
+    await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 60000 });
     await page.waitForLoadState('networkidle');
     console.log('Navigation successful.');
   } catch (error) {
@@ -43,6 +43,7 @@ async clickOnCreateAnAccountHyperLink(linkName) {
   if (linkName === "Create an Account") {
     // Click on the "Create an Account" button
     console.log('on Create an Account hyperlink......');
+    await page.waitForSelector(userSingupLocators.newUser.createAnAccLink, { timeout: 5000 });
     await page.locator(userSingupLocators.newUser.createAnAccLink).nth(0).click();
     console.log('Clicked on Create an Account hyperlink.');
     //Dismiss any pop-up window if it appears
