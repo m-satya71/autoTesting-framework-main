@@ -21,7 +21,7 @@ async goTo() {
     try {
     const url = process.env.TEST_DEMO_URL;
     console.log(`Navigating to: ${url}`);
-    await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 30000 });
+    await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 50000 });
     await page.waitForLoadState('networkidle');
     console.log('Navigation successful.');
   } catch (error) {
