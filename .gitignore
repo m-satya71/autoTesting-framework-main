@@ -1,0 +1,10 @@
+node_modules/
+/playwright/.cache/
+/logs/
+/reports/
+/screenshots/
+.DS_Store/
+/common/reporters/globalVariables.json/
+/testReports/testResults.json/
+/testOutput/
+env/.env

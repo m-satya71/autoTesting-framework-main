@@ -1,0 +1,17 @@
+{
+  "editor.quickSuggestions": {
+    "comments": true,
+    "strings": true
+  },
+  "cucumberautocomplete.steps": ["**/stepDefinition/*.js"],
+  "editor.formatOnSave": true,
+  "eslint.format.enable": true,
+  "eslint.lintTask.enable": true,
+  "editor.codeActionsOnSave": {
+  "source.fixAll.eslint": "explicit"
+},
+"cucumberautocomplete.syncfeatures": "**/features/*.feature",
+"cucumberautocomplete.strictGherkinCompletion": true,
+"cucumberautocomplete.smartSnippets": true,
+"cucumberautocomplete.stepsInvariants": true
+}

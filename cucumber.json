@@ -1,0 +1,23 @@
+{
+  "default": {
+    "require": ["env/envManager.js", "common/hooks/hooks.js", "**/*step.js"],
+    "paths": ["/*.feature"],
+    "format": [
+      "@cucumber/pretty-formatter",
+      "json:reports/cucumberReport/web_report.json",
+      "junit:reports/cucumberReport/web_report.xml",
+      "rerun:@rerun.txt"
+    ],
+    "parallel": 20
+  },
+  "rerun": {
+    "require": ["env/envManager.js", "common/hooks/hooks.js", "**/*step.js"],
+    "paths": ["/*.feature", "./@rerun.txt"],
+    "format": [
+      "@cucumber/pretty-formatter",
+      "json:reports/cucumberReport/web_report_rerun.json",
+      "junit:reports/cucumberReport/web_report_rerun.xml"
+    ],
+    "parallel": 20
+  }
+}
