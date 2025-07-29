@@ -29,30 +29,38 @@ class UserLogin {
       throw error;
     }
   }
-  async enterPasswordAndConfirmPasswordOnFied(){
+  async enterUserCredentials(){
   try {
-    const randomPassword = `Password${Math.floor(Math.random() * 1000)}`;
-    await page.locator(userSingupLocators.newUser.userPassword).fill(randomPassword);
-    await page.locator(userSingupLocators.newUser.userConfirmPassword).fill(randomPassword);
-    this.latestPassword = randomPassword;
-
-    // Ensure testData directory exists
-    const testDataDir = path.join(__dirname, '../../testData');
-    if (!fs.existsSync(testDataDir)) {
-      fs.mkdirSync(testDataDir, { recursive: true });
+    // Check if the credentials file exists
+    if (!fs.existsSync(credPath)) { 
+      throw new Error('Signup credentials file not found. Run the signup scenario first.');
     }
-
-    // Save credentials to file
-    fs.writeFileSync(
-      path.join(testDataDir, 'latestSignup.json'),
-      JSON.stringify({ email: this.latestEmail, password: this.latestPassword })
-    );
-
-    await page.locator(userSingupLocators.newUser.userConfirmPassword).scrollIntoViewIfNeeded();
+    // Read the credentials from the file
+    const credentials = JSON.parse(fs.readFileSync(credPath, 'utf-8'));
+    // Enter the email and password from the credentials file
+    console.log('Entering user credentials...');
+    await page.locator(userLoginLocators.loginUser.emailInput).fill(credentials.email);
+    await page.locator(userLoginLocators.loginUser.passwordInput).fill(credentials.password);
+    console.log('User credentials entered successfully.');
+    // Wait for a short duration to ensure the fields are filled
     await page.waitForTimeout(2000);
+    console.log('Waiting for 2 seconds after entering credentials.');
+    // Click on the "Sign In" button
+
     console.log('Password and confirm password entered successfully.');
   } catch (error) {
     console.error('Error entering password and confirm password:', error.message);
+    throw error;
+  }
+}
+async clickOnSignInBtn() {
+  try {
+    // Click on the "Sign In" button
+    console.log('Clicking on Sign In button...');
+    await page.locator(userLoginLocators.loginUser.signInBtn).click();
+    console.log('Clicked on Sign In button.');
+  } catch (error) {
+    console.error('Error clicking on Sign In button:', error.message);
     throw error;
   }
 }
