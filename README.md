@@ -14,3 +14,8 @@ npx playwright install
 
 
 ```
+## Project Details
+Magento using for end to end order placing the product.
+Follwed by BDD and cucumber languague
+
+
