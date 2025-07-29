@@ -100,30 +100,33 @@ async enterEmailIdOnField(){
     throw error;
   }
 }
-async enterPasswordAndConfirmPasswordOnFied(){
-  // Enter password and confirm password in the respective input fields
+async enterPasswordAndConfirmPasswordOnFied() {
   try {
-  // Enter password and confirm password in the respective input fields
-  console.log('Entering password and confirm password...');
-  const randomPassword = `Password${Math.floor(Math.random() * 1000)}`;
-  // Fill the password and confirm password fields with the same random password
-  console.log(randomPassword);
-  await page.locator(userSingupLocators.newUser.userPassword).fill(randomPassword);
-  await page.locator(userSingupLocators.newUser.userConfirmPassword).fill(randomPassword);
-  this.latestPassword = randomPassword;
+    console.log('Entering password and confirm password...');
+    const randomPassword = `Password${Math.floor(Math.random() * 1000)}`;
+    await page.locator(userSingupLocators.newUser.userPassword).fill(randomPassword);
+    await page.locator(userSingupLocators.newUser.userConfirmPassword).fill(randomPassword);
+    this.latestPassword = randomPassword;
+
+    // Ensure testData directory exists before writing the file
+    const testDataDir = path.join(__dirname, '../../testData');
+    if (!fs.existsSync(testDataDir)) {
+      fs.mkdirSync(testDataDir, { recursive: true });
+    }
+
     // Save credentials to file
     fs.writeFileSync(
-      path.join(__dirname, '../../testData/latestSignup.json'),
+      path.join(testDataDir, 'latestSignup.json'),
       JSON.stringify({ email: this.latestEmail, password: this.latestPassword })
     );
-  await page.locator(userSingupLocators.newUser.userConfirmPassword).scrollIntoViewIfNeeded();
-  await page.waitForTimeout(2000); // Wait for 2 seconds to ensure the fields are filled
-  console.log('Password and confirm password entered successfully.');
+
+    await page.locator(userSingupLocators.newUser.userConfirmPassword).scrollIntoViewIfNeeded();
+    await page.waitForTimeout(2000); // Wait for 2 seconds to ensure the fields are filled
+    console.log('Password and confirm password entered successfully.');
   } catch (error) {
     console.error('Error entering password and confirm password:', error.message);
     throw error;
   }
-
 }
   
 async clickOnCreateAnAccountBtn(creationBtn){

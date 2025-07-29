@@ -39,8 +39,8 @@ class UserLogin {
     const credentials = JSON.parse(fs.readFileSync(credPath, 'utf-8'));
     // Enter the email and password from the credentials file
     console.log('Entering user credentials...');
-    await page.locator(userLoginLocators.loginUser.emailInput).fill(credentials.email);
-    await page.locator(userLoginLocators.loginUser.passwordInput).fill(credentials.password);
+    await page.locator(userLoginLocators.loginUser.userEmail).fill(credentials.email);
+    await page.locator(userLoginLocators.loginUser.userPassword).fill(credentials.password);
     console.log('User credentials entered successfully.');
     // Wait for a short duration to ensure the fields are filled
     await page.waitForTimeout(2000);
